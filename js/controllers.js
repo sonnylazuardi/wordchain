@@ -39,22 +39,27 @@ angular.module('myApp.controllers', [])
                   var lastkey = keys[keys.length-1];
                   var lastword = $scope.messages[lastkey].text;
                   var lastchar = lastword[lastword.length-1];
-                  if ($scope.newMessage.length >= 3) {
-                     if (!$scope.checkExist($scope.newMessage)) {
-                        if ($scope.newMessage[0] == lastchar) {
-                           $scope.messages.$add({text: $scope.newMessage, fbid: $scope.user.fbid});
-                           $scope.user.highscore += $scope.newMessage.length;
-                           // $scope.lasttry = $scope.newMessage;
-                           $scope.newMessage = null; 
-                           angular.element('#word').popover('hide');
+                  var alpha = /^[A-Za-z ]+$/;
+                  if ($scope.newMessage.match(alpha)) {
+                     if ($scope.newMessage.length >= 3) {
+                        if (!$scope.checkExist($scope.newMessage)) {
+                           if ($scope.newMessage[0] == lastchar) {
+                              $scope.messages.$add({text: $scope.newMessage, fbid: $scope.user.fbid});
+                              $scope.user.highscore += $scope.newMessage.length;
+                              // $scope.lasttry = $scope.newMessage;
+                              $scope.newMessage = null; 
+                              angular.element('#word').popover('hide');
+                           } else {
+                              angular.element('#word').attr('data-content', 'The word doesn\'t started with character "'+lastchar+'"').popover('show');
+                           }
                         } else {
-                           angular.element('#word').attr('data-content', 'The word doesn\'t started with character "'+lastchar+'"').popover('show');
+                           angular.element('#word').attr('data-content', 'The word has been answered before').popover('show');
                         }
                      } else {
-                        angular.element('#word').attr('data-content', 'The word has been answered before').popover('show');
+                        angular.element('#word').attr('data-content', 'The word must be 3 characters or more').popover('show');
                      }
                   } else {
-                     angular.element('#word').attr('data-content', 'The word must be 3 characters or more').popover('show');
+                     angular.element('#word').attr('data-content', 'The word must consist of alphabet only').popover('show');
                   }
                }
             } else {

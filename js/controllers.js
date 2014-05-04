@@ -46,8 +46,9 @@ angular.module('myApp.controllers', [])
 
    // add new messages to the list
    $scope.addMessage = function() {
-      if( $scope.newMessage ) {
-         $.get('https://www.googleapis.com/scribe/v1/research?key=AIzaSyDqVYORLCUXxSv7zneerIgC2UYMnxvPeqQ&dataset=dictionary&dictionaryLanguage=en&query='+$scope.newMessage, function(data) {
+      var baru = $scope.newMessage;
+      if( baru ) {
+         $.get('https://www.googleapis.com/scribe/v1/research?key=AIzaSyDqVYORLCUXxSv7zneerIgC2UYMnxvPeqQ&dataset=dictionary&dictionaryLanguage=en&query='+baru, function(data) {
             if (data.data) {
                var keys = $scope.messages.$getIndex();
                if (keys.length) {
@@ -55,12 +56,12 @@ angular.module('myApp.controllers', [])
                   var lastword = $scope.messages[lastkey].text;
                   var lastchar = lastword[lastword.length-1];
                   var alpha = /^[A-Za-z ]+$/;
-                  if ($scope.newMessage.match(alpha)) {
-                     if ($scope.newMessage.length >= 3) {
-                        if (!$scope.checkExist($scope.newMessage)) {
-                           if ($scope.newMessage[0] == lastchar) {
-                              $scope.messages.$add({text: $scope.newMessage, fbid: $scope.user.fbid});
-                              $scope.user.highscore += $scope.newMessage.length;
+                  if (baru.match(alpha)) {
+                     if (baru.length >= 3) {
+                        if (!$scope.checkExist(baru)) {
+                           if (baru[0] == lastchar) {
+                              $scope.messages.$add({text: baru, fbid: $scope.user.fbid});
+                              $scope.user.highscore += baru.length;
                               // $scope.lasttry = $scope.newMessage;
                               $scope.newMessage = null; 
                               angular.element('#word').popover('hide');

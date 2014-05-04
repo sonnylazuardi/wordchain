@@ -27,7 +27,7 @@
 	<div class="col-md-8 col-md-offset-2">
 		<div id="messages" ng-show="messages">
 			<div ng-repeat="message in messages | orderByPriority | reverse" ng-animate="'animate'">
-				<div class="board">
+				<div class="board" data-container="body" data-placement="top" data-content="..." data-trigger="hover" popuphover>
 					<div class="tile pic">
 						<img ng-src="http://graph.facebook.com/{{message.fbid}}/picture" alt="">
 					</div>

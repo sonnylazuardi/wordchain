@@ -25,12 +25,10 @@ angular.module('myApp.controllers', [])
 .controller('GameCtrl', ['$scope', 'syncData', function($scope, syncData) {
    $scope.newMessage = null;
    syncData(['users', $scope.auth.user.uid]).$bind($scope, 'user');
-
+   // angular.element('.board').popover();
    // constrain number of messages by limit into syncData
    // add the array into $scope.messages
    $scope.messages = syncData('messages', 10);
-
-   $scope.lasttry = null;
 
    $scope.checkExist = function(word) {
       var keys = $scope.messages.$getIndex();

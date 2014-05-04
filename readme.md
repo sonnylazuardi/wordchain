@@ -3,9 +3,11 @@ Wordchain
 
 Multiplayer word chaining game using angular.js and firebase
 
+![wordchain](http://i.imgur.com/S5TNeLy.jpg?1)
+
 ## How to install
 
-	npm install pushserve
+	npm install -g pushserve
 
 change to source directory
 

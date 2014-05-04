@@ -28,6 +28,12 @@ full stack javascript development
 - Google Dictionary API
 - Wikitionary API
 
+## Todo
+
+- hover to see meaning
+- fix concurrent answer
+- hall of fame
+
 ## License
 
 (The MIT License)

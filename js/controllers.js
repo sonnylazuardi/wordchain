@@ -15,6 +15,8 @@ angular.module('myApp.controllers', [])
    // add the array into $scope.messages
    $scope.messages = syncData('messages', 10);
 
+   $scope.lasttry = null;
+
    // add new messages to the list
    $scope.addMessage = function() {
       if( $scope.newMessage ) {
@@ -25,13 +27,18 @@ angular.module('myApp.controllers', [])
                   var lastkey = keys[keys.length-1];
                   var lastword = $scope.messages[lastkey].text;
                   var lastchar = lastword[lastword.length-1];
-                  if ($scope.newMessage[0] == lastchar) {
-                     $scope.messages.$add({text: $scope.newMessage, fbid: $scope.user.fbid});
-                     $scope.user.highscore += $scope.newMessage.length;
-                     $scope.newMessage = null; 
-                     angular.element('#word').popover('hide');
+                  if ($scope.lasttry != $scope.newMessage) {
+                     if ($scope.newMessage[0] == lastchar) {
+                        $scope.messages.$add({text: $scope.newMessage, fbid: $scope.user.fbid});
+                        $scope.user.highscore += $scope.newMessage.length;
+                        $scope.lasttry = $scope.newMessage;
+                        $scope.newMessage = null; 
+                        angular.element('#word').popover('hide');
+                     } else {
+                        angular.element('#word').attr('data-content', 'The word doesn\'t started with character "'+lastchar+'"').popover('show');
+                     }
                   } else {
-                     angular.element('#word').attr('data-content', 'The word doesn\'t started with character "'+lastchar+'"').popover('show');
+                     angular.element('#word').attr('data-content', 'The word has been answered before').popover('show');
                   }
                }
             } else {
@@ -49,6 +56,7 @@ angular.module('myApp.controllers', [])
    $scope.word = '';
    $scope.definitions = [];
    $scope.loading = false;
+
    $scope.typed = function() {
       if ($scope.word.length == 4) {
          var searchword = $scope.word.substr(0,4);

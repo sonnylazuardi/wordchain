@@ -207,6 +207,10 @@ input {
   margin-bottom: 10px;
 }
 
+.frame {
+  margin-bottom: 10px;
+}
+
 .board:hover {
   background: #fb7f7f;
   border-radius: 5px;

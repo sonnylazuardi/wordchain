@@ -10,6 +10,11 @@ angular.module('myApp.routes', ['ngRoute'])
          controller: 'HomeCtrl'
       });
 
+      $routeProvider.when('/hall', {
+         templateUrl: 'partials/hall.html',
+         controller: 'HallCtrl'
+      });
+
       $routeProvider.when('/game', {
          authRequired: true,
          templateUrl: 'partials/game.html',

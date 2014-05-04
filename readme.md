@@ -32,7 +32,6 @@ full stack javascript development
 
 - hover to see meaning
 - fix concurrent answer
-- hall of fame
 
 ## License
 

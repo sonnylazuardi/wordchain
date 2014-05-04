@@ -7,6 +7,21 @@ angular.module('myApp.controllers', [])
    syncData('syncedValue').$bind($scope, 'syncedValue');
 }])
 
+.controller('HallCtrl', ['$scope', 'syncData', function($scope, syncData) {
+   var sync = syncData('users');//.$bind($scope, 'users');
+   $scope.users = null;
+   $scope.keys = null;
+   $scope.halls = [];
+   sync.$on('loaded', function() {
+      $scope.users = sync;
+      $scope.keys = $scope.users.$getIndex();
+      for(var i = 0; i < $scope.keys.length; i++) {
+         $scope.halls.push($scope.users[$scope.keys[i]]);
+      }
+   });
+   
+}])
+
 .controller('GameCtrl', ['$scope', 'syncData', function($scope, syncData) {
    $scope.newMessage = null;
    syncData(['users', $scope.auth.user.uid]).$bind($scope, 'user');

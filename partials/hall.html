@@ -1,0 +1,19 @@
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<h1>Hall of Fame</h1>
+
+		<div class="row">
+			<div class="col-md-3" ng-repeat="user in halls | orderBy:'-highscore'">
+				<div class="frame">
+					<img ng-src="http://graph.facebook.com/{{user.fbid}}/picture?type=square&width=200&height=200" alt="">
+					<div>
+						{{user.name}}
+					</div>
+					<div>
+						{{user.highscore}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

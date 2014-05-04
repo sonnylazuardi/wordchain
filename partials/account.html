@@ -1,0 +1,35 @@
+
+<h1>Account</h1>
+
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <div class="well">
+            
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="frame">
+                        <img ng-src="http://graph.facebook.com/{{user.fbid}}/picture?type=large" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="name" ng-model="user.name" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label>Score</label>
+                <div class="tile blurred flex">{{user.highscore}}</div>
+            </div>
+
+            <br>
+
+            <a ng-click="logout()" class="btn btn-danger">Log Out</a>
+        </div>
+
+    </div>
+
+
+</div>
+
+

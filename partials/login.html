@@ -1,0 +1,38 @@
+<div style="margin-bottom: 20px">
+    <a ng-click="login()" href class="btn btn-lg btn-primary">Login using Facebook</a>
+    <p ng-show="err" class="error">{{err}}</p>
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div id="messages" ng-show="messages">
+            <div ng-repeat="message in messages | orderByPriority | reverse" ng-animate="'animate'">
+                <div class="board">
+                    <div class="tile pic">
+                        <img ng-src="http://graph.facebook.com/{{message.fbid}}/picture" alt="">
+                    </div>
+                    <span ng-repeat="char in message.text track by $index" ng-animate="'animate'">
+                        <div class="tile blurred" ng-if="$index == message.text.length - 1">
+                            {{char}}
+                        </div>
+                        <div class="tile" ng-if="$index != message.text.length - 1">
+                            {{char}}
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>      
+    </div>
+</div>
+
+<br>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <h1>Game Instruction</h1>
+
+        <p>Try to guess the word with the prefix of the last character taken from previous word</p>
+    </div>
+</div>
+
+

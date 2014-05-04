@@ -1,0 +1,40 @@
+<div class="search-box">
+	<h1>Dictionary</h1>
+
+	<p>let you find the definition of a word</p>
+
+	<form class="form-inline">
+		<div class="form-group">
+			<i class="fa fa-refresh fa-spin loader"></i>
+		</div>
+
+		<div class="form-group">
+			<input type="text" class="form-control" data-provider="typeahead" placeholder="Start typing word here..." ng-model="word" ng-change="typed()" id="word-box">
+		</div>
+
+		<div class="form-group">
+			<button class="btn btn-success" type="submit" ng-click="search()">Search</button>
+		</div>
+
+		<div class="form-group">
+			<button class="btn btn-primary" ng-click="back()">Back</button>
+		</div>
+	</form>
+</div>
+
+<div class="translate">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div ng-repeat="definition in definitions">
+				<h1>{{definition.word}}</h1>
+				<ul>
+					<li ng-repeat="meaning in definition.meanings">
+						{{meaning.meaning}}
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+	

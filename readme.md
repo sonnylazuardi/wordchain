@@ -1,7 +1,7 @@
 Wordchain
 =========
 
-Try to guess the word with the prefix of the last character taken from previous word.
+Multiplayer word chaining game using angular.js and firebase
 
 ## How to install
 

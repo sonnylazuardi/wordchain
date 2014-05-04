@@ -17,6 +17,18 @@ angular.module('myApp.controllers', [])
 
    $scope.lasttry = null;
 
+   $scope.checkExist = function(word) {
+      var keys = $scope.messages.$getIndex();
+      var found = false;
+      for (var i = 0; i < keys.length; i++) {
+         if ($scope.messages[keys[i]].text == word) {
+            found = true;
+            break;
+         }
+      }
+      return found;
+   }
+
    // add new messages to the list
    $scope.addMessage = function() {
       if( $scope.newMessage ) {
@@ -27,11 +39,11 @@ angular.module('myApp.controllers', [])
                   var lastkey = keys[keys.length-1];
                   var lastword = $scope.messages[lastkey].text;
                   var lastchar = lastword[lastword.length-1];
-                  if ($scope.lasttry != $scope.newMessage) {
+                  if (!$scope.checkExist($scope.newMessage)) {
                      if ($scope.newMessage[0] == lastchar) {
                         $scope.messages.$add({text: $scope.newMessage, fbid: $scope.user.fbid});
                         $scope.user.highscore += $scope.newMessage.length;
-                        $scope.lasttry = $scope.newMessage;
+                        // $scope.lasttry = $scope.newMessage;
                         $scope.newMessage = null; 
                         angular.element('#word').popover('hide');
                      } else {

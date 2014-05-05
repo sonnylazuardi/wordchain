@@ -30,7 +30,6 @@ full stack javascript development
 
 ## Todo
 
-- hover to see meaning
 - fix concurrent answer
 
 ## License

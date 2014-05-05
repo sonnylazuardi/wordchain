@@ -44,7 +44,7 @@ angular.module('myApp.controllers', [])
 
    // add new messages to the list
    $scope.addMessage = function() {
-      var baru = $scope.newMessage;
+      var baru = $scope.newMessage.toLowerCase();
       if( baru ) {
          $.get('https://www.googleapis.com/scribe/v1/research?key=AIzaSyDqVYORLCUXxSv7zneerIgC2UYMnxvPeqQ&dataset=dictionary&dictionaryLanguage=en&query='+baru, function(data) {
             if (data.data) {

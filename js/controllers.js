@@ -85,6 +85,9 @@ angular.module('myApp.controllers', [])
          });    
       }
    };
+   angular.element('#word').on('click', function() {
+      angular.element('#word').attr('data-content', '...').popover('hide');
+   });
 }])
 
 .controller('DictionaryCtrl', ['$scope', '$location', function($scope, $location) {

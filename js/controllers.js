@@ -105,13 +105,19 @@ angular.module('myApp.controllers', [])
       }
    }
    $scope.search = function() {
-      angular.element('.loader').fadeTo(1000, 1)
-      $.get('https://www.googleapis.com/scribe/v1/research?key=AIzaSyDqVYORLCUXxSv7zneerIgC2UYMnxvPeqQ&dataset=dictionary&dictionaryLanguage=en&query='+$scope.word, function(data) {
-         console.log(data);
-         angular.element('.loader').fadeTo(1000, 0)
-      // console.log(data.data[0].dictionary.definitionData);
-      $scope.definitions = data.data[0].dictionary.definitionData;
-      $scope.$apply();
+      angular.element('.loader').fadeTo(1000, 1);
+      var tempSearch = $scope.word;
+      $.get('https://www.googleapis.com/scribe/v1/research?key=AIzaSyDqVYORLCUXxSv7zneerIgC2UYMnxvPeqQ&dataset=dictionary&dictionaryLanguage=en&query='+tempSearch, function(data) {
+        var result = data.data;
+         
+        angular.element('.loader').fadeTo(1000, 0)
+        if (result) {
+          $scope.definitions = result[0].dictionary.definitionData;
+        } else {
+          $scope.definitions = [{meanings: [{meaning: 'Word "'+tempSearch+'" is not found'}]}];
+        }
+
+        $scope.$apply();
    }, 'jsonp');
    }
    $scope.back = function() {

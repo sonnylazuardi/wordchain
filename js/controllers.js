@@ -105,10 +105,10 @@ angular.module('myApp.controllers', [])
       }
    }
    $scope.search = function() {
-      angular.element('.loader').fadeIn(1000);
+      angular.element('.loader').fadeTo(1000, 1)
       $.get('https://www.googleapis.com/scribe/v1/research?key=AIzaSyDqVYORLCUXxSv7zneerIgC2UYMnxvPeqQ&dataset=dictionary&dictionaryLanguage=en&query='+$scope.word, function(data) {
          console.log(data);
-         angular.element('.loader').fadeOut(1000);
+         angular.element('.loader').fadeTo(1000, 0)
       // console.log(data.data[0].dictionary.definitionData);
       $scope.definitions = data.data[0].dictionary.definitionData;
       $scope.$apply();
@@ -117,7 +117,7 @@ angular.module('myApp.controllers', [])
    $scope.back = function() {
       $location.path('/');
    }
-   angular.element('.loader').hide();
+   angular.element('.loader').fadeTo(0, 0)
 }])
 
 .controller('LoginCtrl', ['$scope', 'loginService', '$location', 'syncData',  function($scope, loginService, $location, syncData) {

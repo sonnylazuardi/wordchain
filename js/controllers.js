@@ -107,11 +107,15 @@ angular.module('myApp.controllers', [])
    $scope.search = function() {
       angular.element('.loader').fadeIn(1000);
       $.get('https://www.googleapis.com/scribe/v1/research?key=AIzaSyDqVYORLCUXxSv7zneerIgC2UYMnxvPeqQ&dataset=dictionary&dictionaryLanguage=en&query='+$scope.word, function(data) {
+         var result = data.data[0];
          console.log(data);
          angular.element('.loader').fadeOut(1000);
-      // console.log(data.data[0].dictionary.definitionData);
-      $scope.definitions = data.data[0].dictionary.definitionData;
-      $scope.$apply();
+         
+         if (result) {
+            $scope.definitions = result.dictionary.definitionData;
+         }
+         
+         $scope.$apply();
    }, 'jsonp');
    }
    $scope.back = function() {

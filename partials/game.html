@@ -19,7 +19,7 @@
 				</div>
 			</div>
 		</form>
-		
+
 	</div>
 </div>
 
@@ -31,17 +31,19 @@
 					<div class="tile pic">
 						<img ng-src="http://graph.facebook.com/{{message.fbid}}/picture" alt="">
 					</div>
-					<span ng-repeat="char in message.text track by $index" ng-animate="'animate'">
-						<div class="tile blurred" ng-if="$index == message.text.length - 1">
-							{{char}}
-						</div>
-						<div class="tile" ng-if="$index != message.text.length - 1">
-							{{char}}
-						</div>
-					</span>
+					<div class="answer">
+						<span ng-repeat="char in message.text track by $index" ng-animate="'animate'">
+							<div class="tile blurred" ng-if="$index == message.text.length - 1">
+								{{char}}
+							</div>
+							<div class="tile" ng-if="$index != message.text.length - 1">
+								{{char}}
+							</div>
+						</span>
+					</div>
 				</div>
 			</div>
-		</div>		
+		</div>
 	</div>
 </div>
 

@@ -3,11 +3,11 @@
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-.controller('HomeCtrl', ['$scope', 'syncData', function($scope, syncData) {
+.controller('HomeCtrl', function($scope, syncData) {
    syncData('syncedValue').$bind($scope, 'syncedValue');
-}])
+})
 
-.controller('HallCtrl', ['$scope', 'syncData', function($scope, syncData) {
+.controller('HallCtrl', function($scope, syncData) {
    var sync = syncData('users');//.$bind($scope, 'users');
    $scope.users = null;
    $scope.keys = null;
@@ -20,9 +20,9 @@ angular.module('myApp.controllers', [])
       }
    });
    
-}])
+})
 
-.controller('GameCtrl', ['$scope', 'syncData', function($scope, syncData) {
+.controller('GameCtrl', function($scope, syncData, $http) {
    $scope.newMessage = null;
    syncData(['users', $scope.auth.user.uid]).$bind($scope, 'user');
    // angular.element('.board').popover();
@@ -46,7 +46,7 @@ angular.module('myApp.controllers', [])
    $scope.addMessage = function() {
       var baru = $scope.newMessage.toLowerCase();
       if( baru ) {
-         $.get('https://www.googleapis.com/scribe/v1/research?key=AIzaSyDqVYORLCUXxSv7zneerIgC2UYMnxvPeqQ&dataset=dictionary&dictionaryLanguage=en&query='+baru, function(data) {
+         $http.get('https://www.googleapis.com/scribe/v1/research?key=AIzaSyDqVYORLCUXxSv7zneerIgC2UYMnxvPeqQ&dataset=dictionary&dictionaryLanguage=en&query='+baru).success(function(data) {
             if (data.data) {
                var keys = $scope.messages.$getIndex();
                if (keys.length) {
@@ -88,9 +88,9 @@ angular.module('myApp.controllers', [])
    angular.element('#word').on('click', function() {
       angular.element('#word').attr('data-content', '...').popover('hide');
    });
-}])
+})
 
-.controller('DictionaryCtrl', ['$scope', '$location', function($scope, $location) {
+.controller('DictionaryCtrl', function($scope, $location, $http) {
    $scope.word = '';
    $scope.definitions = [];
    $scope.loading = false;
@@ -118,15 +118,15 @@ angular.module('myApp.controllers', [])
         }
 
         $scope.$apply();
-   }, 'jsonp');
+      }, 'jsonp');
    }
    $scope.back = function() {
       $location.path('/');
    }
    angular.element('.loader').fadeTo(0, 0)
-}])
+})
 
-.controller('LoginCtrl', ['$scope', 'loginService', '$location', 'syncData',  function($scope, loginService, $location, syncData) {
+.controller('LoginCtrl', function($scope, loginService, $location, syncData) {
    $scope.email = null;
    $scope.pass = null;
    $scope.confirm = null;
@@ -184,9 +184,9 @@ angular.module('myApp.controllers', [])
          }
          return !$scope.err;
       }
-   }])
+   })
 
-.controller('AccountCtrl', ['$scope', 'loginService', 'syncData', '$location', function($scope, loginService, syncData, $location) {
+.controller('AccountCtrl', function($scope, loginService, syncData, $location) {
    syncData(['users', $scope.auth.user.uid]).$bind($scope, 'user');
 
    $scope.logout = function() {
@@ -227,4 +227,4 @@ angular.module('myApp.controllers', [])
       }
    }
 
-}]);
+});

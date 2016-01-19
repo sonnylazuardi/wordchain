@@ -99,7 +99,6 @@ angular.module('myApp.controllers', [])
       if ($scope.word.length == 4) {
          var searchword = $scope.word.substr(0,4);
          $.get('http://en.wiktionary.org/w/api.php?search='+searchword+'&action=opensearch', function(data) {
-            console.log(data[1]);
             angular.element('#word-box').typeahead('destroy').typeahead({source: data[1]});
          }, 'jsonp');
       }
@@ -112,7 +111,7 @@ angular.module('myApp.controllers', [])
          
         angular.element('.loader').fadeTo(1000, 0)
         if (result) {
-          $scope.definitions = result[0].dictionary.definitionData;
+          $scope.definitions = result[0].dictionaryData.definitionData;
         } else {
           $scope.definitions = [{meanings: [{meaning: 'Word "'+tempSearch+'" is not found'}]}];
         }
@@ -138,11 +137,8 @@ angular.module('myApp.controllers', [])
             $scope.err = err? err + '' : null;
             if (!err) {
                var sync = syncData(['users', $scope.auth.user.uid]);
-               console.log(sync);
                sync.$on('loaded', function() {
-                  console.log(sync);
                   if (!sync.name) {
-                     console.log(sync);
                      sync.name = user.username;
                      sync.fbid = user.id;
                      sync.highscore = 0;

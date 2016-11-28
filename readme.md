@@ -20,7 +20,7 @@ open in browser
 
 ## Technology Stack
 
-full stack javascript development
+Full stack javascript development
 
 - Firebase
 - Angular.js
@@ -30,7 +30,7 @@ full stack javascript development
 
 ## Todo
 
-- fix concurrent answer
+- Fix concurrent answer
 
 ## License
 
